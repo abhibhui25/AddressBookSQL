@@ -29,3 +29,8 @@ update EmpPayRoll set Gender='M'
 WHERE Name='Sehwag' or Name='Dhoni' or Name='Ganguly'; 
  
 Select * from EmpPayRoll; 
+
+SELECT SUM(salary)
+FROM EmpPayRoll
+where Gender='M'
+GROUP BY Gender;
