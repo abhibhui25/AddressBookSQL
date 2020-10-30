@@ -1,0 +1,78 @@
+create database payroll_service; 
+show databases;
+use payroll_service;
+CREATE TABLE EmpPayRoll (
+    id INT unsigned NOT NULL auto_increment,
+    Name varchar(255) NOT NULL,
+	salary double NOT NULL,
+    start DATE NOT NULL,
+    primary key(id)
+    );
+INSERT INTO EmpPayRoll (Name, salary, start)
+VALUES ('Dhoni',1000000.0,'2018-02-01');    
+
+INSERT INTO EmpPayRoll (Name, salary, start)
+VALUES ('Sehwag',200000.0,'2018-03-21');
+
+INSERT INTO EmpPayRoll (Name, salary, start)
+VALUES ('Ganguly',800000.0,'2018-04-19');
+    
+Select * from EmpPayRoll;    
+
+Select salary from EmpPayRoll
+where name='Dhoni';    
+
+ALTER TABLE EmpPayRoll
+ADD Gender char(1) after Name;
+  
+update EmpPayRoll set Gender=
+'M' WHERE Name='Sehwag' or Name='Dhoni' or Name='Ganguly'; 
+ 
+Select * from EmpPayRoll; 
+
+SELECT SUM(salary)
+FROM EmpPayRoll
+where Gender='M'
+GROUP BY Gender;
+
+ALTER TABLE EmpPayRoll ADD phone_no VARCHAR(100) After Name;
+ALTER TABLE EmpPayRoll ADD Address VARCHAR(100) After phone_no;
+ALTER TABLE EmpPayRoll ADD Department VARCHAR(100) NOT NULL After Address;
+ALTER TABLE EmpPayRoll ALTER Address SET default 'TBD';
+ALTER TABLE EmpPayRoll RENAME COLUMN salary to basic_pay;
+ALTER TABLE EmpPayRoll ADD Deductions Double NOT NULL After basic_pay;
+ALTER TABLE EmpPayRoll ADD taxable_pay Double NOT NULL After Deductions;
+ALTER TABLE EmpPayRoll ADD income_tax double NOT NULL After taxable_pay;
+ALTER TABLE EmpPayRoll ADD net_pay double NOT NULL After income_tax;
+
+CREATE TABLE Dept (
+    id INT unsigned NOT NULL,
+    dept_name varchar(255) NOT NULL,
+	dept_id double NOT NULL,
+    primary key(dept_id),
+    foreign key(dept_id) references EmpPayRoll(id)
+    );
+
+
+INSERT INTO EmpPayRoll (Name, phone_no,Address,Department,Gender,basic_pay,Deductions,taxable_pay,income_tax,net_pay,start)
+VALUES ('Alysse','9988998899','Michigan B-21','HR','F',0,0,0,0,0,'2018-04-19');
+
+
+INSERT INTO EmpPayRoll (Name, phone_no,Address,Department,Gender,basic_pay,Deductions,taxable_pay,income_tax,net_pay,start)
+VALUES ('Alysse','9988998899','Michigan B-21','IT','F',18000000.0,2000.0,1100010.0,6780.0,6780.0,'2018-03-12');
+
+SELECT COUNT(Gender)
+FROM EmpPayRoll
+where Gender='F'
+GROUP BY Gender;
+
+SELECT COUNT(Gender)
+FROM EmpPayRoll
+where Gender='M'
+GROUP BY Gender;
+
+Select basic_pay from EmpPayRoll
+where start BETWEEN CAST('2018-01-01' AS DATE) AND DATE(NOW());    
+
+
+Select * from EmpPayRoll; 
