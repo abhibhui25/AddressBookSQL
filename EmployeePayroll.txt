@@ -65,3 +65,19 @@ VALUES ('Alysse','9988998899','Michigan B-21','IT','F',18000000.0,2000.0,1100010
 
 
 Select * from EmpPayRoll; 
+
+SELECT COUNT(Gender)
+FROM EmpPayRoll
+where Gender='F'
+GROUP BY Gender;
+
+SELECT COUNT(Gender)
+FROM EmpPayRoll
+where Gender='M'
+GROUP BY Gender;
+
+Select basic_pay from EmpPayRoll
+where start BETWEEN CAST('2018-01-01' AS DATE) AND DATE(NOW());    
+
+
+Select * from EmpPayRoll; 
