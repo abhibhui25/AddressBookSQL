@@ -23,3 +23,13 @@ INSERT INTO AddressBook (FirstName, LastName, Address, City, State,zip,phone,ema
 VALUES ('Punit', 'Patel', 'Megan 21', 'Mexico', 'AP','4642','945314400', 'abc@gmail.com');
 
 SELECT * FROM AddressBook;
+
+select * from AddressBook
+WHERE City='Mexico';
+
+SELECT COUNT(State)
+FROM AddressBook;
+
+SELECT * FROM AddressBook
+where City='California'
+ORDER BY FirstName;
